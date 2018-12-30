@@ -1,0 +1,60 @@
+@using System.CodeDom.Compiler
+@using OJX.Models
+@model OJX.Models.Submission
+
+@{
+	ViewBag.Title = "Submitted";
+}
+
+<h2>Submission #@Model.Id</h2>
+@{
+	var submission = Model;
+	string colorState;
+	if ((submission.Verdict.AsJudgeState() & JudgeState.NotExited) != 0)
+	{
+		colorState = "text-warning";
+	}
+	else if (submission.Verdict.AsJudgeState() == JudgeState.Accepted)
+	{
+		colorState = "text-success";
+	}
+	else
+	{
+		colorState = "text-danger";
+	}
+}
+<dl class="dl-horizontal">
+	<dt>Problem: </dt>
+	<dd>@Html.ActionLink(Model.Problem.Title, "Index", "Problem", new{id = submission.Problem.Id}, null)</dd>
+	<dt>Coder: </dt>
+	<dd>@Model.User.UserName</dd>
+	<dt>State: </dt>
+	<dd class="@colorState">@Model.Verdict</dd>
+	@if (Model.Verdict.AsJudgeState() == JudgeState.CompileError)
+	{
+		<dt></dt>
+		<dd><pre><code>@Model.CompileInfo</code></pre></dd>
+	}
+	<dt>Date & Time: </dt>
+	<dd>@Model.DateTime.ToString("M/d/yyyy H:mm:ss")</dd>
+	<dt>Language:</dt>
+	<dd>@Model.Language</dd>
+	<dt>Time: </dt>
+	<dd>@Model.Time ms</dd>
+	<dt>Length: </dt>
+	<dd>@Model.Code.Length bytes</dd>
+	@* <dt>Memory: </dt> *@
+	@* <dd>@Model.Memory KiB</dd> *@
+
+</dl>
+
+
+@{
+	var markdownLanguageSpecifier = LanguageString.GetMarkdownLanguageSpecifier(Model.Language);
+}
+
+<div class="markdown">
+```@markdownLanguageSpecifier
+@Model.Code
+```
+</div>

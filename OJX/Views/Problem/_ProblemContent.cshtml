@@ -1,0 +1,33 @@
+@model OJX.Models.Problem
+<div align="center">
+	<h2>@ViewBag.Title</h2>
+	<dl>
+		<dd>Time Limit: @Model.TimeLimit milliseconds</dd>
+		<dd>Memory Limit: @Model.MemoryLimit mebibytes</dd>
+		<dd>[@Html.ActionLink("Submit Code","Submit", new{id = Model.Id})] [@Html.ActionLink("View Status", "List", "Status", new{problemId = Model.Id}, null)]</dd>
+	</dl>
+</div>
+<hr/>
+
+	
+		<div class="markdown">@Model.Description</div>
+@*		<p class="markdown">@(Model.Description)</p>
+		<h3>Input</h3>
+		<p class="markdown">@(Model.Input)</p>
+		<h3>Output</h3>
+		<p class="markdown">@(Model.Output)</p>
+		<h3>Examples</h3>
+		foreach (var problemExample in Model.ProblemExamples)
+		{
+			<h4>Input</h4>
+			<pre><code>@problemExample.Input</code></pre>
+			<h4>Output</h4>
+			<pre><code>@problemExample.Output</code></pre>
+		}
+		if (!Model.Note.IsEmpty())
+		{
+			<h3>Note</h3>
+			Console.WriteLine(Model.Note);
+			<span class="markdown">@(Model.Note)</span>
+		}*@
+	

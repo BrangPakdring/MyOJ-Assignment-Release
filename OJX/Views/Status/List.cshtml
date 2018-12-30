@@ -1,0 +1,104 @@
+@using OJX.Models
+@model IEnumerable<OJX.Models.Submission>
+@{
+	ViewBag.Title = "Status";
+}
+<h2>Status</h2>
+<hr/>
+
+<table class="table table-striped table-hover">
+	<thead>
+	<tr>
+		<th>#</th>
+		<th>Problem</th>
+		<th>Verdict</th>
+		<th>Coder</th>
+		<th>Date & Time</th>
+		<th>Language</th>
+		<th>Time (ms)</th>
+		@* <th>Memory (MiB)</th> *@
+		<th>Length (bytes)</th>
+	</tr>
+	</thead>
+	<tbody>
+	@foreach (var submission in Model)
+	{
+		<tr>
+			<td>@Html.ActionLink(submission.Id.ToString(), "Submission", "Status", new {id = submission.Id}, null)</td>
+			@*{
+				Console.WriteLine(submission.Id);
+				Console.WriteLine(submission.Problem.Title);
+				Console.WriteLine(submission.Verdict);
+				Console.WriteLine(submission.User.UserName);
+				Console.WriteLine(submission.Language);
+				Console.WriteLine(submission.Time);
+				Console.WriteLine(submission.Memory);
+				Console.WriteLine(submission.Length);
+			}*@
+			<td>@Html.ActionLink(submission.Problem.Title, "Index", "Problem", new {id = submission.Problem.Id}, null)</td>
+			@{
+				string colorState;
+				if ((submission.Verdict.AsJudgeState() & JudgeState.NotExited) != 0)
+				{
+					colorState = "text-warning";
+				}
+				else if (submission.Verdict.AsJudgeState() == JudgeState.Accepted)
+				{
+					colorState = "text-success";
+				}
+				else
+				{
+					colorState = "text-danger";
+				}
+			}
+			<td class="@colorState">@submission.Verdict</td>
+			<td>@submission.User.UserName</td>
+			<td>@submission.DateTime.ToString("M/d/yyyy H:mm:ss")</td>
+			<td>@submission.Language</td>
+			<td>@submission.Time</td>
+			@* <td>@submission.Memory</td> *@
+			<td>@submission.Length</td>
+		</tr>
+	}
+	</tbody>
+	<ul class="pagination">
+		@* <li><a href="#">&laquo;</a></li> *@
+		
+		@if (Model.Any())
+		{ 
+			var cnt = SubmissionModel.GetSubmissionsCount();
+			var limit = int.Parse(Request.Params["limit"] ?? "20");
+			var totPages = (cnt + limit - 1) / int.Parse(Request.Params["limit"] ?? "20");
+			var curPage = int.Parse(Request.Params["page"] ?? "1");
+			if (curPage == 1)
+			{
+				<li class="disabled"><a>&laquo;</a></li>
+			}
+			else
+			{
+				<li>@Html.ActionLink("«", "List", new{page = curPage - 1}, null)</li>
+			}
+			for (var i = 1; i <= totPages; ++i)
+			{
+				if (i == curPage)
+				{
+					<li class="active"><a>@i</a></li>
+				}
+				else
+				{
+					<li>
+						@Html.ActionLink(i.ToString(), "List", new {page = i}, null)
+					</li>
+				}
+			}
+			if (curPage == totPages)
+			{
+				<li class="disabled"><a href="#">&raquo;</a></li>
+			}
+			else
+			{
+				<li>@Html.ActionLink("»", "List", new{page = curPage + 1}, null)</li>
+			}
+		}
+	</ul>
+</table>

@@ -1,0 +1,25 @@
+@model dynamic
+@{
+	ViewBag.Title = "Contest";
+}
+<h2>@ViewBag.Title</h2>
+<hr/>
+
+<table class="table table-hover table-striped">
+	<thead>
+	<tr>
+		<th>#</th>
+		<th>Contest Title</th>
+		<th>Begin Time (UTC)</th>
+		<th>End Time (UTC)</th>
+	</tr>
+	</thead>
+	<tbody>
+	@foreach (var problem in Model)
+	{
+		<tr>
+			
+		</tr>
+	}
+	</tbody>
+</table>

@@ -1,0 +1,67 @@
+@using OJX.Models
+@model IEnumerable<OJX.Models.Problem>
+@{
+	ViewBag.Title = "Problem Set";
+}
+<h2>@ViewBag.Title</h2>
+<hr/>
+
+<table class="table table-hover table-striped">
+	
+	<thead>
+	<tr>
+		<th>#</th>
+		<th>Problem Title</th>
+		<th>Statistics (AC / TOT)</th>
+	</tr>
+	</thead>
+	<tbody>
+	@foreach (var problem in Model)
+	{
+		<tr>
+			<td>@problem.Id</td>
+			<td>@Html.ActionLink(problem.Title, "Index", "Problem", new {id = problem.Id}, null)</td>
+			<td>@problem.AcceptedSubmissions / @problem.TotalSubmissions</td>
+		</tr>
+	}
+	</tbody>
+	<ul class="pagination">
+		@* <li><a href="#">&laquo;</a></li> *@
+		@if(Model.Any())
+		{
+			var cnt = ProblemModel.GetProblemsCount();
+			var limit = int.Parse(Request.Params["limit"] ?? "20");
+			var totPages = (cnt + limit - 1) / int.Parse(Request.Params["limit"] ?? "20");
+			var curPage = int.Parse(Request.Params["page"] ?? "1");
+			if (curPage == 1)
+			{
+				<li class="disabled"><a>&laquo;</a></li>
+			}
+			else
+			{
+				<li>@Html.ActionLink("«", "List", new{page = curPage - 1}, null)</li>
+			}
+			for (var i = 1; i <= totPages; ++i)
+			{
+				if (i == curPage)
+				{
+					<li class="active"><a>@i</a></li>
+				}
+				else
+				{
+					<li>
+						@Html.ActionLink(i.ToString(), "List", new {page = i}, null)
+					</li>
+				}
+			}
+			if (curPage == totPages)
+			{
+				<li class="disabled"><a>&raquo;</a></li>
+			}
+			else
+			{
+				<li>@Html.ActionLink("»", "List", new{page = curPage + 1}, null)</li>
+			}
+		}
+	</ul>
+</table>

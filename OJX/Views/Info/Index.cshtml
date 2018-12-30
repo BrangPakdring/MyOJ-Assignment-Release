@@ -1,0 +1,50 @@
+@model dynamic
+
+@{
+	ViewBag.Title = "Info";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr/>
+
+<h4>Environment</h4>
+<dl class="dl-horizontal">
+	<dt>OS: </dt>
+	<dd>Linux, Ubuntu 16.04 LTS</dd>
+	<dt>CPU: </dt>
+	<dd>Intel(R) Xeon(R) CPU E5-2682 v4 @@ 2.50GHz</dd>
+</dl>
+
+<h4>Compilations</h4>
+<dl class="dl-horizontal">
+	<dt>C:</dt>
+	<dd>gcc (Ubuntu 5.4.0-6ubuntu1~16.04.10) 5.4.0 20160609</dd>
+	<dd>
+		<code>gcc -std=c11 -O2 <i>main.c</i> -o <i>main.out</i></code>
+	</dd>
+	<dt>C++:</dt>
+	<dd>g++ (Ubuntu 5.4.0-6ubuntu1~16.04.10) 5.4.0 20160609</dd>
+	<dd>
+		<code>g++ -std=c++17 -O2 <i>main.cpp</i> -o <i>main.out</i></code>
+	</dd>
+	<dt>Java:</dt>
+	<dd>javac 11.0.1</dd>
+	<dd>
+		<code>javac <i>Main.java</i></code>
+	</dd>
+	<dt>Python2:</dt>
+	<dd>Python 2.7.12</dd>
+	<dd>
+		<code>python -m py_compile <i>main.py</i></code>
+	</dd>
+	<dt>Python3:</dt>
+	<dd>Python 3.5.2</dd>
+	<dd>
+		<code>python3 -m py_compile <i>main.py</i></code>
+	</dd>
+	<dt>C#:</dt>
+	<dd>Microsoft (R) Visual C# Compiler version 2.8.2.62916 (2ad4aabc)</dd>
+	<dd>
+		<code>csc <i>main.cs</i></code>
+	</dd>
+</dl>

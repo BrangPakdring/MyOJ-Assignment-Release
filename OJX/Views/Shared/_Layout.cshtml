@@ -1,0 +1,87 @@
+﻿@using System.Web.UI.WebControls
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<title>@ViewBag.Title - MyOJ</title>
+	<link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	@Styles.Render("~/Content/css")
+	@Scripts.Render("~/bundles/modernizr")
+
+
+
+</head>
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			@Html.ActionLink("MyOJ", "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})
+		</div>
+		<div class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				<li>@Html.ActionLink("Home", "Index", "Home", new {area = ""}, null)</li>
+				<li>@Html.ActionLink("Problem Set", "List", "Problem", new {area = ""}, null)</li>
+				@* <li>@Html.ActionLink("Contest", "List", "Contest", new {area = ""}, null)</li> *@
+				<li>@Html.ActionLink("Status", "List", "Status", new {area = ""}, null)</li>
+				<li>@Html.ActionLink("Info", "Index", "Info", new {area = ""}, null)</li>
+			</ul>
+			@Html.Partial("_LoginPartial")
+		</div>
+	</div>
+</div>
+<div class="container body-content">
+	@RenderBody()
+	@RenderSection("SPAViews", required: false)
+	<hr/>
+	<footer>
+		<p>&copy; @DateTime.Now.Year - MyOJ</p>
+	</footer>
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/showdown")
+@RenderSection("Scripts", required: false)
+@* <script src="~/Scripts/showdown/src/options.js"></script> *@
+@* <script src="~/Scripts/showdown/dist/showdown.js"></script> *@
+@* <script src="~/Scripts/showdown/src/loader.js"></script> *@
+@* <script src="~/Scripts/showdown/src/helpers.js"></script> *@
+@* <script src="~/Scripts/showdown/src/converter.js"></script> *@
+@* <script src="~/Scripts/showdown/src/subParsers/encodeCode.js"></script> *@
+@* *@
+@* <script src="~/Scripts/showdown/src/subParsers/detab.js"></script> *@
+@* <script src="~/Scripts/showdown/src/subParsers/metadata.js"></script> *@
+@* <script src="~/Scripts/showdown/src/subParsers/hashPreCodeTags.js"></script> *@
+@* <script src="~/Scripts/showdown/src/subParsers/githubCodeBlocks.js"></script> *@
+@* <script src="~/Scripts/showdown/src/subParsers/hashHTMLBlocks.js"></script> *@
+@* <script src="~/Scripts/showdown/src/subParsers/hashCodeTags.js"></script> *@
+@* <script src="~/Scripts/showdown/src/subParsers/stripLinkDefinitions.js"></script> *@
+@* <script src="~/Scripts/showdown/src/subParsers/blockGamut.js"></script> *@
+@* <script src="~/Scripts/showdown/src/subParsers/unescapeSpecialChars.js"></script> *@
+
+
+
+<script src="~/Scripts/showdown-katex/src/showdown-katex.js"></script>
+
+@* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css"> *@
+@* <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script> *@
+@* $1$ <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js"></script> #1# *@
+<link rel="stylesheet" href="~/Scripts/katex/katex.min.css"/>
+<script src="~/Scripts/katex/katex.min.js"></script>
+<script src="~/Scripts/katex/contrib/auto-render.min.js"></script>
+<script src="~/Scripts/showdown-katex/src/showdown-katex.js"></script>
+
+<link rel="stylesheet" href="~/Scripts/highlight/styles/github.css"/>
+<script src="~/Scripts/highlight/highlight.pack.js"></script>
+@* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/default.min.css"> *@
+@* <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script> *@
+<script src="~/Scripts/renderer.js"></script>
+
+</body>
+</html>
